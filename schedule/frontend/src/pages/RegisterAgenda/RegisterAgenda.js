@@ -1,4 +1,4 @@
-import "./RegisterItinerary.css";
+import "./RegisterAgenda.css";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
@@ -10,11 +10,11 @@ import { useSelector, useDispatch } from "react-redux";
 
 // Redux
 import {
-    publishItinerary,
+    publishAgenda,
     resetMessage,
-} from "../../slices/itinerarySlice";
+} from "../../slices/agendaSlice";
 
-const RegisterItinerary = () => {
+const RegisterAgenda = () => {
     const dispatch = useDispatch();
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { loading, error } = useSelector((state) => state.user);
@@ -30,22 +30,36 @@ const RegisterItinerary = () => {
     // Submit 
     const onSubmit = async function SubmitHandler(data) {
         try {
-            dispatch(publishItinerary(data));
+            dispatch(publishAgenda(data));
 
             resetComponentMessage();
-            navigate("/countries");
+            navigate("/folder");
         } catch (error) {
             console.error("Erro ao processar os dados:", error);
         }
     };
 
     return (
-        <div id="register-itinerary">
-            <h2>Itinerário</h2>
+        <div id="register-agenda">
+            <h2>Agenda</h2>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <label>
-                    <span>Descrição:</span>
+                <label id="labelDate">
+                    <span>Data:</span>
                     <input
+                        {...register("date", {
+                            required: {
+                                value: true,
+                                message: "Este Campo precisa ser preenchido."
+                            },
+                        })}
+                        type="date"
+                        placeholder="Selecione a Data"
+                    />
+                    {errors.date && <span className="error-message">{errors.date.message}</span>}
+                </label>
+                <label id="labelDescription">
+                    <span>Descrição:</span>
+                    <textarea
                         {...register("description", {
                             required: {
                                 value: true,
@@ -53,31 +67,12 @@ const RegisterItinerary = () => {
                             },
                             minLength: {
                                 value: 10,
-                                message: "Tamanho minimo de 10 caracteres"
+                                message: "Tamanho mínimo de 10 caracteres"
                             },
                         })}
-                        type="text"
-                        placeholder="Insira uma descrição"
+                        placeholder="Digite seus compromissos"
                     />
                     {errors.description && <span className="error-message">{errors.description.message}</span>}
-                </label>
-                <label>
-                    <span>Endereço:</span>
-                    <input
-                        {...register("title", {
-                            required: {
-                                value: true,
-                                message: "Este Campo precisa ser preenchido."
-                            },
-                            minLength: {
-                                value: 10,
-                                message: "Tamanho minimo de 10 caracteres"
-                            },
-                        })}
-                        type="text"
-                        placeholder="Insira um endereço"
-                    />
-                    {errors.title && <span className="error-message">{errors.title.message}</span>}
                 </label>
                 {!loading && <input type="submit" value="Cadastrar" />}
                 {loading && <input type="submit" disabled value="Aguarde..." />}
@@ -87,4 +82,4 @@ const RegisterItinerary = () => {
     )
 }
 
-export default RegisterItinerary;
+export default RegisterAgenda;

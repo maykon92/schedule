@@ -27,6 +27,7 @@ import Folder from "./pages/Folder/Folder";
 import Resume from "./pages/Folder/Resume";
 import Italiancitizenship from "./pages/Folder/Italiancitizenship";
 import Documents from "./pages/Folder/Documents";
+import Agenda from "./pages/Folder/Agenda";
 import DirectoryFolder from "./pages/DirectoryFolder/DirectoryFolder";
 
 function App() {
@@ -67,6 +68,7 @@ function App() {
               <Route path="resume" element={<Resume />} />
               <Route path="italiancitizenship" element={<Italiancitizenship />} />
               <Route path="documents" element={<Documents />} />
+              <Route path="agenda" element={<Agenda />} />
             </Route>
             <Route 
               path="/directoryfolder/:id"

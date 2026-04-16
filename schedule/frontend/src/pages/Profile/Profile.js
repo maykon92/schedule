@@ -198,7 +198,7 @@ const Profile = () => {
       <div className="user-photos">
         <h2>Fotos publicadas:</h2>
         <div className="photos-container">
-          {photos &&
+          {Array.isArray(photos) && photos.length > 0 ? (
             photos.map((photo) => (
               <div className="photo" key={photo._id}>
                 {photo.image && (
@@ -221,7 +221,10 @@ const Profile = () => {
                   </Link>
                 )}
               </div>
-            ))}
+            ))
+            ) : (
+              <p>Ainda não há fotos publicadas...</p>
+            )}
           {photos.length === 0 && <p>Ainda não há fotos publicadas...</p>}
         </div>
       </div>

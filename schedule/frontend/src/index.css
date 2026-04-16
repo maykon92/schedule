@@ -43,7 +43,7 @@ label span {
   font-size: 0.7em;
 }
 
-input {
+input, textarea {
   background-color: #3b3b3b;
   color: #aaa;
   border: 1px solid #555;
@@ -53,7 +53,7 @@ input {
   margin-bottom: 0.6em;
 }
 
-input::placeholder {
+input::placeholder, textarea::placeholder {
   color: #aaa;
 }
 
@@ -75,7 +75,7 @@ input[type="submit"] {
   margin-top: 1em;
 }
 
-input:disabled {
+input:disabled, textarea:disabled {
   cursor: not-allowed;
   background-color: #000;
 }

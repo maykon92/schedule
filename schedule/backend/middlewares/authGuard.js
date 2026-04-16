@@ -6,6 +6,7 @@ const jwtSecret = process.env.JWT_SECRET;
 
 const authGuard = async (req, res, next) => {
   const authHeader = req.headers["authorization"];
+  console.log("authHeader", authHeader);
   const token = authHeader && authHeader.split(" ")[1];
 
   // Check if header has a token

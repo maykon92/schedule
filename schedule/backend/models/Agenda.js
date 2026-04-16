@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const itinerarySchema = new Schema(
+const agendaSchema = new Schema(
   {
-    title: String,
+    date: String,
     description: String,
     userId: mongoose.ObjectId,
     userName: String,
@@ -13,6 +13,6 @@ const itinerarySchema = new Schema(
   }
 );
 
-Itinerary = mongoose.model("Itinerary", itinerarySchema);
+Agenda = mongoose.model("Agenda", agendaSchema);
 
-module.exports = Itinerary;
+module.exports = Agenda;

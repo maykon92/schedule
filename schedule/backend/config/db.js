@@ -1,22 +1,19 @@
 const mongoose = require("mongoose");
-// conection 
 
 const dbUser = process.env.DB_USER;
 const dbPassword = process.env.DB_PASS;
 
 const conn = async () => {
-    try {
-        const dbConn = await mongoose.connect(
-            `mongodb+srv://${dbUser}:${dbPassword}@cluster0.ucnvgn8.mongodb.net/?retryWrites=true&w=majority`
-        );
-        console.log("Conectou ao banco!");
+  try {
+    await mongoose.connect(
+      `mongodb+srv://${dbUser}:${dbPassword}@cluster0.ucnvgn8.mongodb.net/schedule?retryWrites=true&w=majority`
+    );
 
-        return dbConn;
-    } catch (error) {
-        console.log(error)
-    }
-}
-
-conn();
+    console.log("Conectou ao Banco!");
+  } catch (error) {
+    console.error("Erro ao conectar no MongoDB:", error.message);
+    throw error;
+  }
+};
 
 module.exports = conn;

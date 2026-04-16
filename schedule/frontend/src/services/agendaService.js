@@ -1,26 +1,26 @@
 import { api, requestConfig } from "../utils/config";
 
-// Publish an user's itinerary
-const publishItinerary = async (data, token) => {
+// Publish an user's agenda
+const publishAgenda = async (data, token) => {
   const config = requestConfig("POST", data, token);
   
   try {
-    const res = await fetch(api + "/itinerarys", config)
+    const res = await fetch(api + "/agendas", config)
     .then((res) => res.json())
     .catch((err) => err);
 
     return res;
   } catch (error) {
-    console.log('Aqui esta outro erro', error);
+    console.log(error);
   }
 };
 
-// Get user itinerarys
-const getUserItinerarys = async (id) => {
+// Get user agendas
+const getUserAgendas = async (id) => {
   const config = requestConfig("GET");
 
   try {
-    const res = await fetch(api + "/itinerarys/user/" + id, config)
+    const res = await fetch(api + "/agendas/user/" + id, config)
       .then((res) => res.json())
       .catch((err) => err);
 
@@ -30,12 +30,12 @@ const getUserItinerarys = async (id) => {
   }
 };
 
-// Get Itinerary
-const getItinerary = async (id) => {
+// Get Agenda
+const getAgenda = async (id) => {
   const config = requestConfig("GET");
 
   try {
-    const res = await fetch(api + "/itinerarys/" + id, config)
+    const res = await fetch(api + "/agendas/" + id, config)
       .then((res) => res.json())
       .catch((err) => err);
 
@@ -45,12 +45,12 @@ const getItinerary = async (id) => {
   }
 };
 
-// Delete an itinerary
-const deleteItinerary = async (id, token) => {
+// Delete an agenda
+const deleteAgenda = async (id, token) => {
   const config = requestConfig("DELETE", "", token);
 
   try {
-    const res = await fetch(api + "/itinerarys/" + id, config)
+    const res = await fetch(api + "/agendas/" + id, config)
       .then((res) => res.json())
       .catch((err) => err);
 
@@ -60,12 +60,12 @@ const deleteItinerary = async (id, token) => {
   }
 };
 
-// Update an itinerary
-const updateItinerary = async (data, id, token) => {
+// Update an agenda
+const updateAgenda = async (data, id, token) => {
   const config = requestConfig("PUT", data, token);
 
   try {
-    const res = await fetch(api + "/itinerarys/" + id, config)
+    const res = await fetch(api + "/agendas/" + id, config)
       .then((res) => res.json())
       .catch((err) => err);
 
@@ -75,10 +75,10 @@ const updateItinerary = async (data, id, token) => {
   }
 };
 
-// Get all itinerarys
-const getItinerarys = async () => {
+// Get all agendas
+const getAgendas = async () => {
   const config = requestConfig("GET");
-  const url = api+"/itinerarys";
+  const url = api+"/agendas";
   
   try {
     const res = await fetch(url, config)
@@ -91,12 +91,12 @@ const getItinerarys = async () => {
   }
 };
 
-// Search itinerarys by userAuth
-const searchItinerarys = async (query) => {
+// Search agendas by userAuth
+const searchAgendas = async (query) => {
   const config = requestConfig("GET");
 
   try {
-    const res = await fetch(api + "/itinerarys/search?q=" + query, config)
+    const res = await fetch(api + "/agendas/search?q=" + query, config)
       .then((res) => res.json())
       .catch((err) => err);
     
@@ -106,14 +106,14 @@ const searchItinerarys = async (query) => {
   }
 };
 
-const itineraryService = {
-  publishItinerary,
-  getUserItinerarys,
-  getItinerary,
-  deleteItinerary,
-  updateItinerary,
-  getItinerarys,
-  searchItinerarys,
+const agendaService = {
+  publishAgenda,
+  getUserAgendas,
+  getAgenda,
+  deleteAgenda,
+  updateAgenda,
+  getAgendas,
+  searchAgendas,
 };
 
-export default itineraryService;
+export default agendaService;

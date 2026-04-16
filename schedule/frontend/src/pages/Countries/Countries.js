@@ -1,3 +1,4 @@
+import './Countries.css';
 import { 
   GoogleMap, 
   Marker, 
@@ -14,6 +15,8 @@ import axios from "axios";
 // Redux
 import {
   getItinerarys,
+  deleteItinerary,
+  resetMessage,
 } from "../../slices/itinerarySlice";
 
 const Countries = () => {
@@ -34,10 +37,10 @@ const Countries = () => {
   useEffect(() => {
     const updateAddressesCoordinates = async () => {
       const coordinatesPromises = itinerarys.map(async (item) => {
-        let coordinates = null; // Inicialize com null em vez de uma string vazia
-        const { title, userId } = item;
+        let coordinates = null;
+        const { title, userId, description, _id } = item;
         if (userId === userAuth._id) {
-          coordinates = await getLatLngFromAddress(title);
+          coordinates = await getLatLngFromAddress(title, description, _id);
         }
         return coordinates;
       });
@@ -49,20 +52,28 @@ const Countries = () => {
     updateAddressesCoordinates();
   }, [itinerarys, userAuth._id]);
   
+  const deleteAddress = (id) => {
+    dispatch(deleteItinerary(id));
+    setSelectedAddress(null);
+    resetComponentMessage();
+  };
 
-  const getLatLngFromAddress = async (address) => {
+  // Reset component message
+  function resetComponentMessage() {
+    setTimeout(() => {
+      dispatch(resetMessage());
+    }, 2000);
+  }
+
+  const getLatLngFromAddress = async (address, description, id) => {
     try {
       const response = await axios.get(
-        `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
-          address
-        )}&key=AIzaSyD9YrWpYTST9nK5YZBZKGQDHLDtVzefflI`
+        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`
       );
-
-      const result = response.data.results[0];
-
-      if (result) {
-        const { lat, lng } = result.geometry.location;
-        return { latitude: lat, longitude: lng };
+  
+      if (response.data.length > 0) {
+        const { lat, lon } = response.data[0];
+        return { latitude: parseFloat(lat), longitude: parseFloat(lon), name: description, id: id };
       } else {
         console.error("Não foi possível obter coordenadas para o endereço:", address);
         return null;
@@ -76,6 +87,7 @@ const Countries = () => {
   // Função para abrir o Street View
   const openStreetView = (address) => {
     const streetViewUrl = `https://www.google.com/maps?q&layer=c&cbll=${address.latitude},${address.longitude}`;
+
     window.open(streetViewUrl, '_blank');
   };
 
@@ -96,7 +108,15 @@ const Countries = () => {
             onClick={() => {
               setSelectedAddress(address);
             }}
-            label={address.name || `Endereço ${index + 1}`}
+            label={{
+              text: address.name,
+              color: 'rgb(24, 14, 88, 1)',
+              fontSize: '14px',
+              fontWeight: 'bold',
+              backgroundColor: 'rgba(270, 270, 255, 0.7)',
+              padding: '8px',
+              borderRadius: '4px',
+            }}
           />
         ))
       ) : (
@@ -110,10 +130,13 @@ const Countries = () => {
             setSelectedAddress(null);
           }}
         >
-          <div>
+          <div id='option'>
             <p>{selectedAddress.name || "Nome não disponível"}</p>
             <button onClick={() => openStreetView(selectedAddress)}>
               Ver Street View
+            </button>
+            <button onClick={() => deleteAddress(selectedAddress.id)}>
+              Deletar Endereço
             </button>
           </div>
         </InfoWindow>

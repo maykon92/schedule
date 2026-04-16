@@ -1,4 +1,10 @@
-#countries {
-    display: flex;
-    justify-content: center;
+#option p {
+    color: #000;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#option button {
+ width: 150px;
+ margin: 2px;
 }

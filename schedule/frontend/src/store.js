@@ -4,6 +4,7 @@ import userReducer from "./slices/userSlice";
 import photoReducer from "./slices/photoSlice";
 import archiveReducer from "./slices/archiveSlice";
 import itineraryReducer from "./slices/itinerarySlice";
+import agendaReducer from "./slices/agendaSlice";
 
 export const store = configureStore({
   reducer: {
@@ -12,5 +13,6 @@ export const store = configureStore({
     photo: photoReducer,
     archive: archiveReducer,
     itinerary: itineraryReducer,
+    agenda: agendaReducer,
   },
 });

@@ -20,6 +20,8 @@ const {
 const authGuard = require("../middlewares/authGuard");
 const { imageUpload } = require("../middlewares/imageUpload");
 
+console.log(authGuard)
+
 // Routes
 router.post("/register", userCreateValidation(), validate, register);
 router.get("/profile", authGuard, getCurrentUser);

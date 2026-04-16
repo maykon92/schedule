@@ -126,8 +126,7 @@ const Italiancitizenship = () => {
       </div>
     );
   };
-  console.log(archives);
-  console.log(userAuth);
+
   return (
     <div id='documents'>
       <div className="title-container">

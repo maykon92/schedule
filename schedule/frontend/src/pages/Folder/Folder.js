@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
-import { BsFileText, BsFilePerson, BsFileWord } from 'react-icons/bs';
+import { BsFileText, BsFilePerson, BsFileWord, BsCalendar } from 'react-icons/bs';
 
 const Folder = () => {
   return ( 
@@ -31,6 +31,15 @@ const Folder = () => {
             <h2>Documentos</h2>
             <hr></hr>
             <p>Documentos pessoais diversos</p>
+          </span>
+        </Link>
+        <Link to="/folder/agenda?q=Agenda">
+          <span className="box-container">
+            <BsCalendar size={32} /> 
+            <br></br>
+            <h2>Agenda</h2>
+            <hr></hr>
+            <p>Programação diária de compromissos.</p>
           </span>
         </Link>
       </div>

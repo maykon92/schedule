@@ -18,7 +18,7 @@ const publishPhoto = async (data, token) => {
 // Get user photos
 const getUserPhotos = async (id) => {
   const config = requestConfig("GET");
-
+  console.log(id);
   try {
     const res = await fetch(api + "/photos/user/" + id, config)
       .then((res) => res.json())
@@ -117,6 +117,7 @@ const getPhotos = async () => {
 
     return res;
   } catch (error) {
+    console.log('chegou aqui o erro');
     console.log(error);
   }
 };
