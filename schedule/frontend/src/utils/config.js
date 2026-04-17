@@ -1,23 +1,23 @@
-export const api = process.env.REACT_APP_API_URL + "/api";
-export const uploads = process.env.REACT_APP_API_URL + "/uploads";
+export const api = (process.env.REACT_APP_API_URL || "http://localhost:5000") + "/api";
+export const uploads = (process.env.REACT_APP_API_URL || "http://localhost:5000") + "/uploads";
 
 export const requestConfig = (method, data, token = null, image = null) => {
   let config;
 
   if (image) {
     config = {
-      method: method,
+      method,
       body: data,
       headers: {},
     };
   } else if (method === "DELETE" || data === null) {
-    config = { 
-      method: method,
+    config = {
+      method,
       headers: {},
     };
   } else {
     config = {
-      method: method,
+      method,
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
