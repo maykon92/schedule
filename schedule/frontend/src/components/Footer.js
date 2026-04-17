@@ -29,10 +29,10 @@ const Footer = () => {
             <a href={urlFaceBook} target="_blank" rel='noopener noreferrer' title="FaceBook">
               <FaFacebookF size={30} />
             </a>
-            <a href={urlLinkdin} target='_blank' rel='noopener noreferrrer' title='Linkdin'>
+            <a href={urlLinkdin} target='_blank' rel='noopener noreferrer' title='Linkdin'>
               <FaLinkedinIn size={30}/>
             </a>
-            <a href={urlYoutube} target='_blank' rel='noopener noreferrrer' title='Youtube'>
+            <a href={urlYoutube} target='_blank' rel='noopener noreferrer' title='Youtube'>
               <FaYoutube size={30}/>
             </a>
           </div>
