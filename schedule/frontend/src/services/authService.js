@@ -5,17 +5,17 @@ const register = async (data) => {
   const config = requestConfig("POST", data);
 
   try {
-    const res = await fetch(api + "/users/register", config)
-      .then((res) => res.json())
-      .catch((err) => err);
+    const response = await fetch(api + "/users/register", config);
+    const resData = await response.json();
 
-    if (res) {
-      localStorage.setItem("user", JSON.stringify(res));
+    if (response.ok && resData._id && resData.token) {
+      localStorage.setItem("user", JSON.stringify(resData));
     }
 
-    return res;
+    return resData;
   } catch (error) {
     console.log(error);
+    return { errors: ["Erro de conexão."] };
   }
 };
 
@@ -29,17 +29,17 @@ const login = async (data) => {
   const config = requestConfig("POST", data);
 
   try {
-    const res = await fetch(api + "/users/login", config)
-      .then((res) => res.json())
-      .catch((err) => err);
+    const response = await fetch(api + "/users/login", config);
+    const resData = await response.json();
 
-    if (res) {
-      localStorage.setItem("user", JSON.stringify(res));
+    if (response.ok && resData._id && resData.token) {
+      localStorage.setItem("user", JSON.stringify(resData));
     }
 
-    return res;
+    return resData;
   } catch (error) {
     console.log(error);
+    return { errors: ["Erro de conexão."] };
   }
 };
 
