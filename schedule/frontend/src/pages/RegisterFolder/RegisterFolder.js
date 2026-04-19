@@ -42,7 +42,7 @@ const RegisterFolder = () => {
         image: data.file[0],
         type: nmFolder[idDocumento],
       };
-      console.log("Caramba chegou aqui", archiveData);
+      
       // build form data
       const formData = new FormData();
       const archiveFormData = Object.keys(archiveData).forEach((key) =>

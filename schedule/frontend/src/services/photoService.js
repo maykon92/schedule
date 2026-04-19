@@ -117,7 +117,6 @@ const getPhotos = async () => {
 
     return res;
   } catch (error) {
-    console.log('chegou aqui o erro');
     console.log(error);
   }
 };

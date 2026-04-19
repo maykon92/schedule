@@ -48,6 +48,4 @@ const authService = {
   login,
 };
 
-console.log("asuthSercive", authService);
-
 export default authService;

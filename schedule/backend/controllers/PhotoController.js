@@ -6,14 +6,8 @@ const mongoose = require("mongoose");
 const insertPhoto = async (req, res) => {
   const { title } = req.body;
   const image = req.file.filename;
-
-  console.log(req.body);
-
   const reqUser = req.user;
-
   const user = await User.findById(reqUser._id);
-
-  console.log(user.name);
 
   // Create photo
   const newPhoto = await Photo.create({
