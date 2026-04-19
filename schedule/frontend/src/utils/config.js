@@ -1,5 +1,5 @@
-export const api = (process.env.REACT_APP_API_URL || "http://localhost:5000") + "/api";
-export const uploads = (process.env.REACT_APP_API_URL || "http://localhost:5000") + "/uploads";
+export const api = "https://schedule-backend-g2qz.onrender.com/api";
+export const uploads = "https://schedule-backend-g2qz.onrender.com/uploads";
 
 export const requestConfig = (method, data, token = null, image = null) => {
   let config;
@@ -9,7 +9,7 @@ export const requestConfig = (method, data, token = null, image = null) => {
       method,
       body: data,
       headers: {},
-    };
+    };  
   } else if (method === "DELETE" || data === null) {
     config = {
       method,

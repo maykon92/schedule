@@ -27,13 +27,10 @@ const logout = () => {
 // Sign in a user
 const login = async (data) => {
   const config = requestConfig("POST", data);
-  console.log(config);
 
   try {
     const response = await fetch(api + "/users/login", config);
     const resData = await response.json();
-    console.log(response);
-    console.log(resData);
 
     if (response.ok && resData._id && resData.token) {
       localStorage.setItem("user", JSON.stringify(resData));
@@ -50,5 +47,7 @@ const authService = {
   logout,
   login,
 };
+
+console.log("asuthSercive", authService);
 
 export default authService;
